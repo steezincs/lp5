@@ -42,21 +42,18 @@ Contributor(s):
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <!---property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_gustavo_barros?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">gustavo_barros</property>
+    <property name="hibernate.connection.password"></property!-->
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/mpv_aluno?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">mpv_aluno</property>
-    <property name="hibernate.connection.password">senha123</property>
-    <mapping class="bean.Grupo"/>
-    <mapping class="bean.OsProdutos"/>
-    <mapping class="bean.Vendedor"/>
-    <mapping class="bean.OsServicosId"/>
-    <mapping class="bean.VendasProdutos"/>
-    <mapping class="bean.Clientes"/>
-    <mapping class="bean.Produtos"/>
-    <mapping class="bean.Vendas"/>
-    <mapping class="bean.Servicos"/>
-    <mapping class="bean.Usuarios"/>
-    <mapping class="bean.Os"/>
-    <mapping class="bean.OsServicos"/>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_gustavo_barros?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <mapping class="bean.UsuariosGab"/>
+    <mapping class="bean.PagamentoGab"/>
+    <mapping class="bean.CompraGab"/>
+    <mapping class="bean.CompraprodutoGab"/>
+    <mapping class="bean.ProdutoGab"/>
+    <mapping class="bean.FornecedorGab"/>
   </session-factory>
 </hibernate-configuration>

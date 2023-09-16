@@ -11,7 +11,7 @@ import org.hibernate.SessionFactory;
 
 /**
  *
- * @author u71665822198
+ * @author u06539293151
  */
 public abstract class DAOAbstract {
     
@@ -21,9 +21,10 @@ public abstract class DAOAbstract {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         session = sessionFactory.openSession();
 }
+    
     public abstract void insert(Object object);
     public abstract void update(Object object);
     public abstract void delete(Object object);
-    public abstract Object list(int id);
+    public abstract Object list(int  id);
     public abstract List listAll();
 }
