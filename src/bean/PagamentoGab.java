@@ -1,11 +1,13 @@
 package bean;
-// Generated 16/09/2023 15:46:14 by Hibernate Tools 4.3.1
+// Generated 21/09/2023 17:27:29 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,25 +26,23 @@ public class PagamentoGab  implements java.io.Serializable {
 
 
      private int idPagamentoGab;
-     private FornecedorGab fornecedorGab;
      private Date dataPagamentoGab;
      private int parcelasGab;
      private int formaPagamento;
-     private double valorGab;
+     private String valorGab;
 
     public PagamentoGab() {
     }
 
-    public PagamentoGab(int idPagamentoGab, FornecedorGab fornecedorGab, Date dataPagamentoGab, int parcelasGab, int formaPagamento, double valorGab) {
+    public PagamentoGab(int idPagamentoGab, Date dataPagamentoGab, int parcelasGab, int formaPagamento, String valorGab) {
        this.idPagamentoGab = idPagamentoGab;
-       this.fornecedorGab = fornecedorGab;
        this.dataPagamentoGab = dataPagamentoGab;
        this.parcelasGab = parcelasGab;
        this.formaPagamento = formaPagamento;
        this.valorGab = valorGab;
     }
    
-     @Id 
+     @Id
 
     
     @Column(name="idPagamento_gab", unique=true, nullable=false)
@@ -52,16 +52,6 @@ public class PagamentoGab  implements java.io.Serializable {
     
     public void setIdPagamentoGab(int idPagamentoGab) {
         this.idPagamentoGab = idPagamentoGab;
-    }
-
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="idFornecedor_gab", nullable=false)
-    public FornecedorGab getFornecedorGab() {
-        return this.fornecedorGab;
-    }
-    
-    public void setFornecedorGab(FornecedorGab fornecedorGab) {
-        this.fornecedorGab = fornecedorGab;
     }
 
     @Temporal(TemporalType.DATE)
@@ -96,11 +86,11 @@ public class PagamentoGab  implements java.io.Serializable {
 
     
     @Column(name="valor_gab", nullable=false, precision=22, scale=0)
-    public double getValorGab() {
+    public String getValorGab() {
         return this.valorGab;
     }
     
-    public void setValorGab(double valorGab) {
+    public void setValorGab(String valorGab) {
         this.valorGab = valorGab;
     }
 

@@ -1,10 +1,12 @@
 package bean;
-// Generated 16/09/2023 15:46:14 by Hibernate Tools 4.3.1
+// Generated 21/09/2023 17:27:29 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -43,7 +45,7 @@ public class UsuariosGab  implements java.io.Serializable {
        this.ativoGab = ativoGab;
     }
    
-     @Id 
+     @Id
 
     
     @Column(name="idUsuarios_gab", unique=true, nullable=false)

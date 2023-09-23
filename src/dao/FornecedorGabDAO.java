@@ -45,7 +45,7 @@ public class FornecedorGabDAO extends DAOAbstract{
     public Object list(int id) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(FornecedorGab.class);
-        criteria.add (Restrictions.eq("idfornecedor_gab", id));
+        criteria.add (Restrictions.eq("idFornecedor_gab", id));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

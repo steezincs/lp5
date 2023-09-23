@@ -45,7 +45,7 @@ public class CompraGabDAO extends DAOAbstract{
     public Object list(int id) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(CompraGab.class);
-        criteria.add (Restrictions.eq("idcompra_gab", id));
+        criteria.add (Restrictions.eq("idCompra_gab", id));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

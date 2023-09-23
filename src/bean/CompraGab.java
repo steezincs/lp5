@@ -1,17 +1,16 @@
 package bean;
-// Generated 16/09/2023 15:46:14 by Hibernate Tools 4.3.1
+// Generated 21/09/2023 17:27:29 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,7 +30,6 @@ public class CompraGab  implements java.io.Serializable {
      private Date dataGab;
      private String nomeProdutoGab;
      private double valorGab;
-     private Set compraprodutoGabs = new HashSet(0);
 
     public CompraGab() {
     }
@@ -44,16 +42,8 @@ public class CompraGab  implements java.io.Serializable {
         this.nomeProdutoGab = nomeProdutoGab;
         this.valorGab = valorGab;
     }
-    public CompraGab(int idCompraGab, FornecedorGab fornecedorGab, Date dataGab, String nomeProdutoGab, double valorGab, Set compraprodutoGabs) {
-       this.idCompraGab = idCompraGab;
-       this.fornecedorGab = fornecedorGab;
-       this.dataGab = dataGab;
-       this.nomeProdutoGab = nomeProdutoGab;
-       this.valorGab = valorGab;
-       this.compraprodutoGabs = compraprodutoGabs;
-    }
    
-     @Id 
+     @Id
 
     
     @Column(name="idCompra_gab", unique=true, nullable=false)
@@ -103,15 +93,6 @@ public class CompraGab  implements java.io.Serializable {
     
     public void setValorGab(double valorGab) {
         this.valorGab = valorGab;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="compraGab")
-    public Set getCompraprodutoGabs() {
-        return this.compraprodutoGabs;
-    }
-    
-    public void setCompraprodutoGabs(Set compraprodutoGabs) {
-        this.compraprodutoGabs = compraprodutoGabs;
     }
 
 

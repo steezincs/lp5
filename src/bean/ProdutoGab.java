@@ -1,14 +1,12 @@
 package bean;
-// Generated 16/09/2023 15:46:14 by Hibernate Tools 4.3.1
+// Generated 21/09/2023 17:27:29 by Hibernate Tools 4.3.1
 
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,16 +22,15 @@ public class ProdutoGab  implements java.io.Serializable {
      private int idProdutoGab;
      private String nomeGab;
      private String descricaoGab;
-     private double valorGab;
+     private String valorGab;
      private int tamanhoGab;
      private int categoriaGab;
-     private Set compraprodutoGabs = new HashSet(0);
 
     public ProdutoGab() {
     }
 
 	
-    public ProdutoGab(int idProdutoGab, String nomeGab, String descricaoGab, double valorGab, int tamanhoGab, int categoriaGab) {
+    public ProdutoGab(int idProdutoGab, String nomeGab, String descricaoGab, String valorGab, int tamanhoGab, int categoriaGab) {
         this.idProdutoGab = idProdutoGab;
         this.nomeGab = nomeGab;
         this.descricaoGab = descricaoGab;
@@ -41,17 +38,8 @@ public class ProdutoGab  implements java.io.Serializable {
         this.tamanhoGab = tamanhoGab;
         this.categoriaGab = categoriaGab;
     }
-    public ProdutoGab(int idProdutoGab, String nomeGab, String descricaoGab, double valorGab, int tamanhoGab, int categoriaGab, Set compraprodutoGabs) {
-       this.idProdutoGab = idProdutoGab;
-       this.nomeGab = nomeGab;
-       this.descricaoGab = descricaoGab;
-       this.valorGab = valorGab;
-       this.tamanhoGab = tamanhoGab;
-       this.categoriaGab = categoriaGab;
-       this.compraprodutoGabs = compraprodutoGabs;
-    }
    
-     @Id 
+     @Id
 
     
     @Column(name="idProduto_gab", unique=true, nullable=false)
@@ -85,11 +73,11 @@ public class ProdutoGab  implements java.io.Serializable {
 
     
     @Column(name="valor_gab", nullable=false, precision=22, scale=0)
-    public double getValorGab() {
+    public String getValorGab() {
         return this.valorGab;
     }
     
-    public void setValorGab(double valorGab) {
+    public void setValorGab(String valorGab) {
         this.valorGab = valorGab;
     }
 
@@ -111,15 +99,6 @@ public class ProdutoGab  implements java.io.Serializable {
     
     public void setCategoriaGab(int categoriaGab) {
         this.categoriaGab = categoriaGab;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="produtoGab")
-    public Set getCompraprodutoGabs() {
-        return this.compraprodutoGabs;
-    }
-    
-    public void setCompraprodutoGabs(Set compraprodutoGabs) {
-        this.compraprodutoGabs = compraprodutoGabs;
     }
 
 

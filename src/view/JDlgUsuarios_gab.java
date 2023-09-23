@@ -5,14 +5,15 @@
  */
 package view;
 
+import bean.UsuariosGab;
+import dao.UsuariosGabDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import pesquisa.JDlgUsuariosPesquisa_gab;
 import tools.Util_gab;
 
 
@@ -22,7 +23,10 @@ import tools.Util_gab;
  */
 public class JDlgUsuarios_gab extends javax.swing.JDialog {
     
+    private boolean incluindo;
     MaskFormatter mascaraCPF, mascaraDataNascimento;
+    public UsuariosGab usuariosGab;
+    public UsuariosGabDAO usuariosGabDAO;
 
     /**
      * Creates new form JDlgUsuarios
@@ -30,8 +34,11 @@ public class JDlgUsuarios_gab extends javax.swing.JDialog {
     public JDlgUsuarios_gab(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        usuariosGabDAO = new UsuariosGabDAO();
+        
         Util_gab.limparCampos(jTxtCodigo, jFmtData,jFmtCpf,jTxtNome,jTxtApelido, jPwfSenha, jCboNivel, jCboAtivo);
         Util_gab.habilitar(false, jTxtCodigo, jFmtData,jFmtCpf,jTxtNome,jTxtApelido, jPwfSenha, jCboNivel, jCboAtivo);
+        
         setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
         try {
@@ -42,6 +49,43 @@ public class JDlgUsuarios_gab extends javax.swing.JDialog {
         }
         jFmtCpf.setFormatterFactory(new DefaultFormatterFactory(mascaraCPF));
         jFmtData.setFormatterFactory(new DefaultFormatterFactory(mascaraDataNascimento));
+    }
+    
+    
+    public UsuariosGab viewBean() {
+        UsuariosGab usuariosGab = new UsuariosGab();
+    
+        usuariosGab.setIdUsuariosGab(Util_gab.strInt(jTxtCodigo.getText()));
+        usuariosGab.setNomeGab(jTxtNome.getText());
+        usuariosGab.setApelidoGab(jTxtApelido.getText());
+        usuariosGab.setCpfGab(jFmtCpf.getText());
+        usuariosGab.setDataNascimentoGab(Util_gab.strDate(jFmtData.getText()));
+        usuariosGab.setSenhaGab(jPwfSenha.getText());
+        usuariosGab.setNivelGab(jCboNivel.getSelectedIndex());      
+        if (jCboAtivo.isSelected() == true) {
+            usuariosGab.setAtivoGab("S");
+        } else {
+            usuariosGab.setAtivoGab("N");
+        }
+        return usuariosGab;
+    }
+    
+    public void beanView(UsuariosGab usuariosgab) {
+        String id = String.valueOf(usuariosgab.getIdUsuariosGab());
+        jTxtCodigo.setText(id);
+        jTxtNome.setText(usuariosgab.getNomeGab());
+        jTxtApelido.setText(usuariosgab.getApelidoGab());
+        jFmtCpf.setText(usuariosgab.getCpfGab());
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        jFmtData.setText( formato.format( usuariosgab.getDataNascimentoGab() ) );
+        jPwfSenha.setText(usuariosgab.getSenhaGab());
+        jCboNivel.setSelectedIndex(usuariosgab.getNivelGab());
+        if (usuariosgab.getAtivoGab().equals("S") == true) {
+            jCboAtivo.setSelected(true);
+        } else {
+            jCboAtivo.setSelected(false);
+        }
+
     }
 
     /**
@@ -279,31 +323,30 @@ public class JDlgUsuarios_gab extends javax.swing.JDialog {
         // TODO add your handling code here:
         Util_gab.habilitar(true, jTxtCodigo, jFmtData,jFmtCpf,jTxtNome,jTxtApelido, jPwfSenha, jCboNivel, jCboAtivo);
         Util_gab.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-        Util_gab.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        incluindo = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-if (Util_gab.perguntar("Deseja excluir o projeto?") == true){
-            Util_gab.mensagem("Exclusão feita.");
+if (Util_gab.perguntar("Deseja excluir o projeto?") == true){        
+        usuariosGab = viewBean();
+        usuariosGabDAO.delete(usuariosGab);
+        Util_gab.mensagem("Exclusão feita.");
         }else {
             Util_gab.mensagem("Exclusão cancelada.");
         }
+
         Util_gab.limparCampos(jTxtCodigo, jFmtData,jFmtCpf,jTxtNome,jTxtApelido, jPwfSenha, jCboNivel, jCboAtivo);
 
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        // TODO add your handling code here:
-//        Usuarios usuarios = viewBean();
-//        Usuarios_DAO usuarios_DAO = new Usuarios_DAO();
-//        
-//        if(incluindo == true){
-//            usuarios_DAO.insert(usuarios);
-//        } else{
-//            usuarios_DAO.update(usuarios);
-//            JOptionPane.showMessageDialog(null, "Alteração feita com sucesso!.");
-//        }
+        usuariosGab = viewBean();
+        if (incluindo == true ){
+        usuariosGabDAO.insert(usuariosGab);}
+        else{
+                usuariosGabDAO.update(usuariosGab);
+                }
         
         Util_gab.limparCampos(jTxtCodigo, jFmtData,jFmtCpf,jTxtNome,jTxtApelido, jPwfSenha, jCboNivel, jCboAtivo);
          Util_gab.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
@@ -321,24 +364,17 @@ if (Util_gab.perguntar("Deseja excluir o projeto?") == true){
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
+        incluindo = true;
         Util_gab.limparCampos(jTxtCodigo, jFmtData,jFmtCpf,jTxtNome,jTxtApelido, jPwfSenha, jCboNivel, jCboAtivo);
-         Util_gab.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        Util_gab.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         Util_gab.habilitar(true, jTxtCodigo, jFmtData,jFmtCpf,jTxtNome,jTxtApelido, jPwfSenha, jCboNivel, jCboAtivo);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-        // TODO add your handling code here:
-//        String resp = JOptionPane.showInputDialog(null, "Entre com o código (PK)","Pesquisa",2);
-//        int id = Integer.parseInt(resp);
-//        Usuarios_DAO usuarios_DAO = new Usuarios_DAO();
-//        Usuarios usuarios = (Usuarios) usuarios_DAO.list(id);
-//        beanView(usuarios); 
-
-//            JDlgUsuariosPesquisa jDlgUsuariosPesquisa = new JDlgUsuariosPesquisa(null, true);
-//            jDlgUsuariosPesquisa.setTelaAnterior(this);
-//            jDlgUsuariosPesquisa.setVisible(true);
-            
-
+        JDlgUsuariosPesquisa_gab jDlgUsuariosPesquisa_gab = new JDlgUsuariosPesquisa_gab(null, true);
+        jDlgUsuariosPesquisa_gab.setTelaAnterior(this);
+        jDlgUsuariosPesquisa_gab.setVisible(true);
+        Util_gab.habilitar(true, jBtnAlterar, jBtnCancelar, jBtnExcluir, jBtnIncluir);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     /**

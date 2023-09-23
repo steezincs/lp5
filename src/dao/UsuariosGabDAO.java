@@ -46,7 +46,7 @@ public class UsuariosGabDAO extends DAOAbstract{
     public Object list(int id) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(UsuariosGab.class);
-        criteria.add (Restrictions.eq("idusuarios_gab", id));
+        criteria.add (Restrictions.eq("idUsuarios_gab", id));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

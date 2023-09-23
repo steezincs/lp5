@@ -5,13 +5,15 @@
  */
 package view;
 
+import bean.FornecedorGab;
+import dao.FornecedorGabDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import pesquisa.JDlgFornecedorPesquisa_gab;
 import tools.Util_gab;
 
 /**
@@ -20,7 +22,11 @@ import tools.Util_gab;
  */
 public class JDlgFornecedor_gab extends javax.swing.JDialog {
     
+    private boolean incluindo;
+    
     MaskFormatter mascaraCnpj, mascaraData, mascaraCEP;
+    public FornecedorGab fornecedorGab;
+    public FornecedorGabDAO fornecedorGabDAO;
 
     /**
      * Creates new form JDlgFornecedor
@@ -28,10 +34,12 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
     public JDlgFornecedor_gab(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jTxtPagamento, jTxtObs, jTxtPrazo);
+        fornecedorGabDAO = new FornecedorGabDAO();
+        
+        Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
         setLocationRelativeTo(null);
         setTitle("Cadastro de Fornecedor");
-        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jTxtPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
         try {
             mascaraCnpj = new MaskFormatter("###.###.###/####-##");
             mascaraData = new MaskFormatter("##/##/####");
@@ -42,6 +50,47 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
         jFmtCnpj.setFormatterFactory(new DefaultFormatterFactory(mascaraCnpj));
         jFmtData.setFormatterFactory(new DefaultFormatterFactory(mascaraData));
         jFmtCep.setFormatterFactory(new DefaultFormatterFactory(mascaraCEP));
+    }
+    
+        public FornecedorGab viewBean() {
+        FornecedorGab fornecedorGab = new FornecedorGab();
+        
+        fornecedorGab.setIdFornecedorGab(Util_gab.strInt(jTxtCodigo.getText()));
+        fornecedorGab.setNomeGab(jTxtNome.getText());
+        fornecedorGab.setDataCadastroGab(Util_gab.strDate(jFmtData.getText()));
+        fornecedorGab.setEmailGab(jTxtEmail.getText());
+        fornecedorGab.setEnderecoGab(jTxtEndereco.getText());
+        fornecedorGab.setTelefoneGab(jTxtTelefone.getText());
+        fornecedorGab.setCnpjGab(jFmtCnpj.getText());
+        fornecedorGab.setResponsavelGab(jTxtResp.getText());
+        fornecedorGab.setCepGab(jFmtCep.getText());
+        fornecedorGab.setPaisGab(jTxtPais.getText());
+        fornecedorGab.setCidadeGab(jTxtCidade.getText());
+        fornecedorGab.setBairroGab(jTxtBairro.getText());
+        fornecedorGab.setNumeroGab(jTxtNumero.getText());
+        fornecedorGab.setObsGab(jTxtObs.getText());
+        fornecedorGab.setPrazoGab(jTxtPrazo.getText());
+             
+        return fornecedorGab;
+    }
+        public void beanView(FornecedorGab fornecedorgab) {
+        String id = String.valueOf(fornecedorgab.getIdFornecedorGab());
+        jTxtCodigo.setText(id);
+        jTxtNome.setText(fornecedorgab.getNomeGab());
+        jTxtEmail.setText(fornecedorgab.getEmailGab());
+        jFmtCnpj.setText(fornecedorgab.getCnpjGab());
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        jFmtData.setText( formato.format( fornecedorgab.getDataCadastroGab() ) );
+        jTxtEndereco.setText(fornecedorgab.getEnderecoGab());
+        jTxtTelefone.setText(fornecedorgab.getTelefoneGab());
+        jFmtCep.setText(fornecedorgab.getCepGab());
+        jTxtPais.setText(fornecedorgab.getPaisGab());
+        jTxtCidade.setText(fornecedorgab.getCidadeGab());
+        jTxtBairro.setText(fornecedorgab.getBairroGab());
+        jTxtNumero.setText(fornecedorgab.getNumeroGab());
+        jTxtObs.setText(fornecedorgab.getObsGab());
+        jTxtPrazo.setText(fornecedorgab.getPrazoGab());
+     
     }
 
     /**
@@ -86,13 +135,13 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
         jLabel17 = new javax.swing.JLabel();
         jTxtNumero = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jTxtPagamento = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jTxtObs = new javax.swing.JTextField();
         jFmtData = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
         jTxtPrazo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
+        jCboPagamento = new javax.swing.JComboBox<>();
 
         jLabel8.setText("CPF");
 
@@ -208,6 +257,8 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
 
         jLabel14.setText("Prazo");
 
+        jCboPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -248,11 +299,11 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
                                             .addComponent(jLabel17)
                                             .addComponent(jTxtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(10, 10, 10))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTxtPagamento)
-                                        .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel18)
-                                            .addGap(0, 0, Short.MAX_VALUE)))))
+                                            .addComponent(jCboPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
@@ -343,8 +394,8 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
                         .addComponent(jTxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCboPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -365,7 +416,7 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTxtPrazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnIncluir)
                     .addComponent(jBtnAlterar)
@@ -395,65 +446,59 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jTxtPagamento, jTxtObs, jTxtPrazo);
+        incluindo = true;
+        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
         Util_gab.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-        Util_gab.habilitar(true,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jTxtPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.habilitar(true,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
+        incluindo = false;
         Util_gab.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-        Util_gab.habilitar(true,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jTxtPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.habilitar(true,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
 if (Util_gab.perguntar("Deseja excluir o projeto?") == true){
-            Util_gab.mensagem("Exclusão feita.");
+    fornecedorGab = viewBean();
+    fornecedorGabDAO.delete(fornecedorGab);        
+    Util_gab.mensagem("Exclusão feita.");
         }else {
             Util_gab.mensagem("Exclusão cancelada.");
         }
-Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jTxtPagamento, jTxtObs, jTxtPrazo);        
-Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jTxtPagamento, jTxtObs, jTxtPrazo);
+Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);        
+Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        // TODO add your handling code here:
-//        Fornecedor fornecedor = viewBean();
-//        Fornecedor_DAO fornecedor_DAO = new Fornecedor_DAO();
-//        
-//        if(incluindo == true){
-//            fornecedor_DAO.insert(fornecedor);
-//        } else{
-//            fornecedor_DAO.update(fornecedor);
-//            JOptionPane.showMessageDialog(null, "Alteração feita com sucesso!.");
-//        }
+        fornecedorGab = viewBean();
+        if (incluindo ==true ){
+        fornecedorGabDAO.insert(fornecedorGab);}
+        else{
+                fornecedorGabDAO.update(fornecedorGab);
+                }
         
-        Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jTxtPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
         Util_gab.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jTxtPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jTxtPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
         Util_gab.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         Util_gab.mensagem("Operação Cancelada");
-        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jTxtPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-        // TODO add your handling code here:
-//        String resp = JOptionPane.showInputDialog(null, "Entre com o código (PK)","Pesquisa",2);
-//        int id = Integer.parseInt(resp);
-//        Fornecedor_DAO fornecedor_DAO = new Fornecedor_DAO();
-//        Fornecedor fornecedor = (Fornecedor) fornecedor_DAO.list(id);
-//        beanView(fornecedor);
-
-
-//        JDlgFornecedorPesquisa jDlgFornecedorPesquisa = new JDlgFornecedorPesquisa(null, true);
-//        jDlgFornecedorPesquisa.setTelaAnterior(this);
-//        jDlgFornecedorPesquisa.setVisible(true);
+        JDlgFornecedorPesquisa_gab jDlgFornecedorPesquisa_gab = new JDlgFornecedorPesquisa_gab(null, true);
+        jDlgFornecedorPesquisa_gab.setTelaAnterior(this);
+        jDlgFornecedorPesquisa_gab.setVisible(true);
+        Util_gab.habilitar(true, jBtnAlterar, jBtnCancelar, jBtnExcluir);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jFmtCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtCepActionPerformed
@@ -520,6 +565,7 @@ Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtE
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnIncluir;
     private javax.swing.JButton jBtnPesquisar;
+    private javax.swing.JComboBox<String> jCboPagamento;
     private javax.swing.JFormattedTextField jFmtCep;
     private javax.swing.JFormattedTextField jFmtCnpj;
     private javax.swing.JFormattedTextField jFmtCpf;
@@ -549,7 +595,6 @@ Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtE
     private javax.swing.JTextField jTxtNome;
     private javax.swing.JTextField jTxtNumero;
     private javax.swing.JTextField jTxtObs;
-    private javax.swing.JTextField jTxtPagamento;
     private javax.swing.JTextField jTxtPais;
     private javax.swing.JTextField jTxtPrazo;
     private javax.swing.JTextField jTxtResp;

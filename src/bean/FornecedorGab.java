@@ -1,15 +1,13 @@
 package bean;
-// Generated 16/09/2023 15:46:14 by Hibernate Tools 4.3.1
+// Generated 21/09/2023 17:27:29 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,18 +34,16 @@ public class FornecedorGab  implements java.io.Serializable {
      private String cidadeGab;
      private String bairroGab;
      private String numeroGab;
-     private String fkPagamentoGab;
+     private int pagamentoGab;
      private String obsGab;
      private String prazoGab;
      private Date dataCadastroGab;
-     private Set compraGabs = new HashSet(0);
-     private Set pagamentoGabs = new HashSet(0);
-
+     
     public FornecedorGab() {
     }
 
 	
-    public FornecedorGab(int idFornecedorGab, String nomeGab, String emailGab, String cnpjGab, String enderecoGab, String telefoneGab, String responsavelGab, String cepGab, String paisGab, String cidadeGab, String bairroGab, String numeroGab, String fkPagamentoGab, String obsGab, String prazoGab, Date dataCadastroGab) {
+    public FornecedorGab(int idFornecedorGab, String nomeGab, String emailGab, String cnpjGab, String enderecoGab, String telefoneGab, String responsavelGab, String cepGab, String paisGab, String cidadeGab, String bairroGab, String numeroGab, int pagamentoGab, String obsGab, String prazoGab, Date dataCadastroGab) {
         this.idFornecedorGab = idFornecedorGab;
         this.nomeGab = nomeGab;
         this.emailGab = emailGab;
@@ -60,30 +56,10 @@ public class FornecedorGab  implements java.io.Serializable {
         this.cidadeGab = cidadeGab;
         this.bairroGab = bairroGab;
         this.numeroGab = numeroGab;
-        this.fkPagamentoGab = fkPagamentoGab;
+        this.pagamentoGab = pagamentoGab;
         this.obsGab = obsGab;
         this.prazoGab = prazoGab;
         this.dataCadastroGab = dataCadastroGab;
-    }
-    public FornecedorGab(int idFornecedorGab, String nomeGab, String emailGab, String cnpjGab, String enderecoGab, String telefoneGab, String responsavelGab, String cepGab, String paisGab, String cidadeGab, String bairroGab, String numeroGab, String fkPagamentoGab, String obsGab, String prazoGab, Date dataCadastroGab, Set compraGabs, Set pagamentoGabs) {
-       this.idFornecedorGab = idFornecedorGab;
-       this.nomeGab = nomeGab;
-       this.emailGab = emailGab;
-       this.cnpjGab = cnpjGab;
-       this.enderecoGab = enderecoGab;
-       this.telefoneGab = telefoneGab;
-       this.responsavelGab = responsavelGab;
-       this.cepGab = cepGab;
-       this.paisGab = paisGab;
-       this.cidadeGab = cidadeGab;
-       this.bairroGab = bairroGab;
-       this.numeroGab = numeroGab;
-       this.fkPagamentoGab = fkPagamentoGab;
-       this.obsGab = obsGab;
-       this.prazoGab = prazoGab;
-       this.dataCadastroGab = dataCadastroGab;
-       this.compraGabs = compraGabs;
-       this.pagamentoGabs = pagamentoGabs;
     }
    
      @Id 
@@ -209,13 +185,13 @@ public class FornecedorGab  implements java.io.Serializable {
     }
 
     
-    @Column(name="fk_Pagamento_gab", nullable=false, length=45)
-    public String getFkPagamentoGab() {
-        return this.fkPagamentoGab;
+    @Column(name="pagamento_gab", nullable=false, length=45)
+    public int getPagamentoGab() {
+        return this.pagamentoGab;
     }
     
-    public void setFkPagamentoGab(String fkPagamentoGab) {
-        this.fkPagamentoGab = fkPagamentoGab;
+    public void setPagamentoGab(int pagamentoGab) {
+        this.pagamentoGab = pagamentoGab;
     }
 
     
@@ -246,24 +222,6 @@ public class FornecedorGab  implements java.io.Serializable {
     
     public void setDataCadastroGab(Date dataCadastroGab) {
         this.dataCadastroGab = dataCadastroGab;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="fornecedorGab")
-    public Set getCompraGabs() {
-        return this.compraGabs;
-    }
-    
-    public void setCompraGabs(Set compraGabs) {
-        this.compraGabs = compraGabs;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="fornecedorGab")
-    public Set getPagamentoGabs() {
-        return this.pagamentoGabs;
-    }
-    
-    public void setPagamentoGabs(Set pagamentoGabs) {
-        this.pagamentoGabs = pagamentoGabs;
     }
 
 

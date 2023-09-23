@@ -150,8 +150,6 @@ public class JFrmPrincipal_gab extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        JDlgCompra_gab jDlgCompra = new JDlgCompra_gab (null, true);
-        jDlgCompra.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMnuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuSairActionPerformed
@@ -161,14 +159,14 @@ public class JFrmPrincipal_gab extends javax.swing.JFrame {
 
     private void jMnuPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuPagamentoActionPerformed
         // TODO add your handling code here:
-                JDlgPagamento_gab  jDlgPagamento = new JDlgPagamento_gab(null,true);
-                jDlgPagamento.setVisible(true);
+                JDlgPagamentoNovo_gab  jDlgPagamentoNovo = new JDlgPagamentoNovo_gab(null,true);
+                jDlgPagamentoNovo.setVisible(true);
     }//GEN-LAST:event_jMnuPagamentoActionPerformed
 
     private void jMnuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuProdutosActionPerformed
         // TODO add your handling code here:
-                JDlgProduto_gab  jDlgProdutos = new JDlgProduto_gab (null,true);
-                jDlgProdutos.setVisible(true);
+                JDlgProdutoNovo_gab  jDlgProdutosNovo = new JDlgProdutoNovo_gab (null,true);
+                jDlgProdutosNovo.setVisible(true);
     }//GEN-LAST:event_jMnuProdutosActionPerformed
 
     private void jMnuFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuFornecedorActionPerformed
