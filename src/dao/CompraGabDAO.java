@@ -6,8 +6,10 @@
 package dao;
 import bean.CompraGab;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -58,6 +60,32 @@ public class CompraGabDAO extends DAOAbstract{
         List lista = criteria.list();
         session.getTransaction().commit();
         return (ArrayList) lista;
+    }
+    
+        public List listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(CompraGab.class);
+        criteria.add(Restrictions.ilike("nomeProdutoGab", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+        public List listData(Date data) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(CompraGab.class);
+        criteria.add(Restrictions.ge("dataGab", data));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+     public List listNomeData(Date data, String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(CompraGab.class);
+        criteria.add(Restrictions.ge("dataGab", data));
+        criteria.add(Restrictions.ilike("nomeProdutoGab", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
     }
     
 }

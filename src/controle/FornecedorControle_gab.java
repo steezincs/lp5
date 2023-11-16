@@ -19,6 +19,7 @@ public class FornecedorControle_gab extends AbstractTableModel {
     
     public void setList(List lista){
         this.lista = lista;
+        this.fireTableDataChanged();
     }
     
     public FornecedorGab getBean(int row) {
@@ -48,7 +49,7 @@ public class FornecedorControle_gab extends AbstractTableModel {
             return fornecedorgab.getEmailGab();
         }
         if (columnIndex == 3){
-            return fornecedorgab.getCnpjGab();
+            return fornecedorgab.getDataCadastroGab();
         }
         if (columnIndex == 4){
             return fornecedorgab.getTelefoneGab();
@@ -67,7 +68,7 @@ public class FornecedorControle_gab extends AbstractTableModel {
             return "Email";
         }
         if (column == 3){
-            return "CNPJ";
+            return "Data Cadastro";
         }
         if (column == 4){
             return "Telefone";

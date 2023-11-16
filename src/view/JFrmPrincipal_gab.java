@@ -5,6 +5,11 @@
  */
 package view;
 
+import query.JDlgConsultaCompra;
+import query.JDlgConsultaFornecedor;
+import query.JDlgConsultaPagamento;
+import query.JDlgConsultaProduto;
+
 /**
  *
  * @author u71665822198
@@ -34,6 +39,11 @@ public class JFrmPrincipal_gab extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        toolProduto = new javax.swing.JButton();
+        toolbarForncedor = new javax.swing.JButton();
+        toolbarPagamento = new javax.swing.JButton();
+        toolCompras = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMnuCadastros = new javax.swing.JMenu();
         jMnuUsuarios = new javax.swing.JMenuItem();
@@ -42,7 +52,7 @@ public class JFrmPrincipal_gab extends javax.swing.JFrame {
         jMnuPagamento = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMnuSair = new javax.swing.JMenuItem();
-        jMnuMovimento = new javax.swing.JMenu();
+        jMnuCompra = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,6 +62,52 @@ public class JFrmPrincipal_gab extends javax.swing.JFrame {
                 formWindowActivated(evt);
             }
         });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        toolProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagens/open-box.png"))); // NOI18N
+        toolProduto.setFocusable(false);
+        toolProduto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        toolProduto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toolProdutoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(toolProduto);
+
+        toolbarForncedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagens/fornecedor.png"))); // NOI18N
+        toolbarForncedor.setFocusable(false);
+        toolbarForncedor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        toolbarForncedor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolbarForncedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toolbarForncedorActionPerformed(evt);
+            }
+        });
+        jPanel1.add(toolbarForncedor);
+
+        toolbarPagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagens/payment-method.png"))); // NOI18N
+        toolbarPagamento.setFocusable(false);
+        toolbarPagamento.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        toolbarPagamento.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolbarPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toolbarPagamentoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(toolbarPagamento);
+
+        toolCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagens/trade.png"))); // NOI18N
+        toolCompras.setFocusable(false);
+        toolCompras.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        toolCompras.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toolComprasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(toolCompras);
 
         jMnuCadastros.setText("Cadastros");
 
@@ -113,7 +169,7 @@ public class JFrmPrincipal_gab extends javax.swing.JFrame {
 
         jMenuBar1.add(jMnuCadastros);
 
-        jMnuMovimento.setText("Movimento");
+        jMnuCompra.setText("Movimento");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagens/payment-method.png"))); // NOI18N
@@ -123,9 +179,9 @@ public class JFrmPrincipal_gab extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMnuMovimento.add(jMenuItem1);
+        jMnuCompra.add(jMenuItem1);
 
-        jMenuBar1.add(jMnuMovimento);
+        jMenuBar1.add(jMnuCompra);
 
         setJMenuBar(jMenuBar1);
 
@@ -133,11 +189,13 @@ public class JFrmPrincipal_gab extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 430, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 281, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 226, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,11 +203,13 @@ public class JFrmPrincipal_gab extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
-     
+
     }//GEN-LAST:event_formWindowActivated
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+    JDlgCompra_gab  jDlgCompra = new JDlgCompra_gab(null,true);
+     jDlgCompra.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMnuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuSairActionPerformed
@@ -181,6 +241,30 @@ public class JFrmPrincipal_gab extends javax.swing.JFrame {
                     jDlgUsuarios.setVisible(true);
     }//GEN-LAST:event_jMnuUsuariosActionPerformed
 
+    private void toolbarForncedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolbarForncedorActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaFornecedor jDlgFornecedor = new JDlgConsultaFornecedor(null, true);
+        jDlgFornecedor.setVisible(true);
+    }//GEN-LAST:event_toolbarForncedorActionPerformed
+
+    private void toolbarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolbarPagamentoActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaPagamento jDlgConsultaPagamento = new JDlgConsultaPagamento(null, true);
+        jDlgConsultaPagamento.setVisible(true);
+    }//GEN-LAST:event_toolbarPagamentoActionPerformed
+
+    private void toolProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolProdutoActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaProduto jDlgProduto = new JDlgConsultaProduto(null, true);
+        jDlgProduto.setVisible(true);
+    }//GEN-LAST:event_toolProdutoActionPerformed
+
+    private void toolComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolComprasActionPerformed
+        // TODO add your handling code here:
+         JDlgConsultaCompra jDlgConsultaCompra = new JDlgConsultaCompra(null, true);
+        jDlgConsultaCompra.setVisible(true);
+    }//GEN-LAST:event_toolComprasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -210,6 +294,18 @@ public class JFrmPrincipal_gab extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -223,12 +319,17 @@ public class JFrmPrincipal_gab extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jMnuCadastros;
+    private javax.swing.JMenu jMnuCompra;
     private javax.swing.JMenuItem jMnuFornecedor;
-    private javax.swing.JMenu jMnuMovimento;
     private javax.swing.JMenuItem jMnuPagamento;
     private javax.swing.JMenuItem jMnuProdutos;
     private javax.swing.JMenuItem jMnuSair;
     private javax.swing.JMenuItem jMnuUsuarios;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JButton toolCompras;
+    private javax.swing.JButton toolProduto;
+    private javax.swing.JButton toolbarForncedor;
+    private javax.swing.JButton toolbarPagamento;
     // End of variables declaration//GEN-END:variables
 }

@@ -60,4 +60,37 @@ public class ProdutoGabDAO extends DAOAbstract{
         return (ArrayList) lista;
     }
     
+        public List listValor(String valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ProdutoGab.class);
+        criteria.add(Restrictions.ilike("valorGab", "%"+valor+"%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+
+        return lista;
+    }
+        
+            public List listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ProdutoGab.class);
+        criteria.add(Restrictions.ilike("nomeGab", "%"+nome+"%"));
+         List lista = criteria.list();
+        session.getTransaction().commit();
+        
+        return lista;
+    }
+    
+     public List listNomeValor(String valor, String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ProdutoGab.class);
+        criteria.add(Restrictions.ilike("valorGab", "%"+valor+"%"));
+        criteria.add(Restrictions.ilike("nomeGab", "%"+nome+"%"));
+         List lista = criteria.list();
+        session.getTransaction().commit();
+        
+        return lista;
+    }
+     
+     
+    
 }

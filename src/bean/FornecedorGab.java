@@ -34,7 +34,7 @@ public class FornecedorGab  implements java.io.Serializable {
      private String cidadeGab;
      private String bairroGab;
      private String numeroGab;
-     private int pagamentoGab;
+     private String ativoGab;
      private String obsGab;
      private String prazoGab;
      private Date dataCadastroGab;
@@ -43,7 +43,7 @@ public class FornecedorGab  implements java.io.Serializable {
     }
 
 	
-    public FornecedorGab(int idFornecedorGab, String nomeGab, String emailGab, String cnpjGab, String enderecoGab, String telefoneGab, String responsavelGab, String cepGab, String paisGab, String cidadeGab, String bairroGab, String numeroGab, int pagamentoGab, String obsGab, String prazoGab, Date dataCadastroGab) {
+    public FornecedorGab(int idFornecedorGab, String nomeGab, String emailGab, String cnpjGab, String enderecoGab, String telefoneGab, String responsavelGab, String cepGab, String paisGab, String cidadeGab, String bairroGab, String numeroGab, String ativoGab, String obsGab, String prazoGab, Date dataCadastroGab) {
         this.idFornecedorGab = idFornecedorGab;
         this.nomeGab = nomeGab;
         this.emailGab = emailGab;
@@ -54,9 +54,9 @@ public class FornecedorGab  implements java.io.Serializable {
         this.cepGab = cepGab;
         this.paisGab = paisGab;
         this.cidadeGab = cidadeGab;
+        this.ativoGab = ativoGab;
         this.bairroGab = bairroGab;
         this.numeroGab = numeroGab;
-        this.pagamentoGab = pagamentoGab;
         this.obsGab = obsGab;
         this.prazoGab = prazoGab;
         this.dataCadastroGab = dataCadastroGab;
@@ -183,18 +183,7 @@ public class FornecedorGab  implements java.io.Serializable {
     public void setNumeroGab(String numeroGab) {
         this.numeroGab = numeroGab;
     }
-
-    
-    @Column(name="pagamento_gab", nullable=false, length=45)
-    public int getPagamentoGab() {
-        return this.pagamentoGab;
-    }
-    
-    public void setPagamentoGab(int pagamentoGab) {
-        this.pagamentoGab = pagamentoGab;
-    }
-
-    
+  
     @Column(name="obs_gab", nullable=false, length=45)
     public String getObsGab() {
         return this.obsGab;
@@ -223,6 +212,18 @@ public class FornecedorGab  implements java.io.Serializable {
     public void setDataCadastroGab(Date dataCadastroGab) {
         this.dataCadastroGab = dataCadastroGab;
     }
+    
+    @Column(name="ativo_gab", nullable=false, length=45)
+    public String getAtivoGab() {
+        return this.ativoGab;
+    }
+    
+    public void setAtivoGab(String ativoGab) {
+        this.ativoGab = ativoGab;
+    }
+
+
+
 
 
 

@@ -43,7 +43,7 @@ public class PagamentoControle_gab extends AbstractTableModel {
            return pagamentoGab.getIdPagamentoGab();
         } 
         if (column == 1) {
-           return pagamentoGab.getParcelasGab();
+           return pagamentoGab.getDataPagamentoGab();
         }
         if (column == 2) {
            return pagamentoGab.getValorGab();
@@ -60,13 +60,13 @@ public class PagamentoControle_gab extends AbstractTableModel {
             return "Id";
         }
         if (column == 1) {
-            return "Parcelas";
+            return "Data Pagamento";
         }
         if (column == 2) {
             return "Valor";
         }
         if (column == 3) {
-            return "Forma de Pagamento";
+            return "Forma Pagamento";
         }
         return "";
     }

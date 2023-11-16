@@ -36,10 +36,10 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
         initComponents();
         fornecedorGabDAO = new FornecedorGabDAO();
         
-        Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboAtivo, jTxtObs, jTxtPrazo);
         setLocationRelativeTo(null);
         setTitle("Cadastro de Fornecedor");
-        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboAtivo, jTxtObs, jTxtPrazo);
         try {
             mascaraCnpj = new MaskFormatter("###.###.###/####-##");
             mascaraData = new MaskFormatter("##/##/####");
@@ -70,6 +70,11 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
         fornecedorGab.setNumeroGab(jTxtNumero.getText());
         fornecedorGab.setObsGab(jTxtObs.getText());
         fornecedorGab.setPrazoGab(jTxtPrazo.getText());
+        if (jCboAtivo.isSelected() == true) {
+            fornecedorGab.setAtivoGab("S");
+        } else {
+            fornecedorGab.setAtivoGab("N");
+        }
              
         return fornecedorGab;
     }
@@ -90,6 +95,11 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
         jTxtNumero.setText(fornecedorgab.getNumeroGab());
         jTxtObs.setText(fornecedorgab.getObsGab());
         jTxtPrazo.setText(fornecedorgab.getPrazoGab());
+        if (fornecedorgab.getAtivoGab().equals("S") == true) {
+            jCboAtivo.setSelected(true);
+        } else {
+            jCboAtivo.setSelected(false);
+        }
      
     }
 
@@ -134,14 +144,13 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
         jTxtBairro = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jTxtNumero = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jTxtObs = new javax.swing.JTextField();
         jFmtData = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
         jTxtPrazo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jCboPagamento = new javax.swing.JComboBox<>();
+        jCboAtivo = new javax.swing.JCheckBox();
 
         jLabel8.setText("CPF");
 
@@ -243,8 +252,6 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
 
         jLabel17.setText("Número");
 
-        jLabel18.setText("Forma Pagamento");
-
         jLabel19.setText("Observação");
 
         jFmtData.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +264,12 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
 
         jLabel14.setText("Prazo");
 
-        jCboPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCboAtivo.setText("Ativo");
+        jCboAtivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCboAtivoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -285,25 +297,19 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
                                     .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(48, 48, 48)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel12)
-                                            .addComponent(jLabel13)
-                                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jFmtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(jTxtBairro, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jTxtCidade, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jTxtPais, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jLabel17)
-                                            .addComponent(jTxtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(10, 10, 10))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel18)
-                                            .addComponent(jCboPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jFmtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTxtBairro, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTxtCidade, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTxtPais, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel17)
+                                    .addComponent(jTxtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCboAtivo))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
@@ -387,16 +393,12 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTxtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCboPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCboAtivo))
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -447,17 +449,16 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
         incluindo = true;
-        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboAtivo, jTxtObs, jTxtPrazo);
         Util_gab.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-        Util_gab.habilitar(true,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.habilitar(true,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboAtivo, jTxtObs, jTxtPrazo);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
         incluindo = false;
         Util_gab.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-        Util_gab.habilitar(true,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
-        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.habilitar(true,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboAtivo, jTxtObs, jTxtPrazo);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -469,8 +470,8 @@ if (Util_gab.perguntar("Deseja excluir o projeto?") == true){
         }else {
             Util_gab.mensagem("Exclusão cancelada.");
         }
-Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);        
-Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
+Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboAtivo, jTxtObs, jTxtPrazo);        
+Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboAtivo, jTxtObs, jTxtPrazo);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
@@ -481,17 +482,17 @@ Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtE
                 fornecedorGabDAO.update(fornecedorGab);
                 }
         
-        Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboAtivo, jTxtObs, jTxtPrazo);
         Util_gab.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboAtivo, jTxtObs, jTxtPrazo);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.habilitar(false,jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboAtivo, jTxtObs, jTxtPrazo);
         Util_gab.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         Util_gab.mensagem("Operação Cancelada");
-        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboPagamento, jTxtObs, jTxtPrazo);
+        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtEndereco, jTxtTelefone, jTxtResp, jFmtCep, jTxtPais, jTxtCidade, jTxtBairro, jTxtNumero, jCboAtivo, jTxtObs, jTxtPrazo);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
@@ -508,6 +509,10 @@ Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtE
     private void jFmtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtDataActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFmtDataActionPerformed
+
+    private void jCboAtivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboAtivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCboAtivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -565,7 +570,7 @@ Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtE
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnIncluir;
     private javax.swing.JButton jBtnPesquisar;
-    private javax.swing.JComboBox<String> jCboPagamento;
+    private javax.swing.JCheckBox jCboAtivo;
     private javax.swing.JFormattedTextField jFmtCep;
     private javax.swing.JFormattedTextField jFmtCnpj;
     private javax.swing.JFormattedTextField jFmtCpf;
@@ -578,7 +583,6 @@ Util_gab.limparCampos(jTxtCodigo, jTxtNome, jFmtData, jTxtEmail, jFmtCnpj, jTxtE
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

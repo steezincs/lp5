@@ -4,10 +4,13 @@
  * and open the template in the editor.
  */
 package dao;
+import bean.CompraGab;
 import bean.PagamentoGab;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -58,6 +61,34 @@ public class PagamentoGabDAO extends DAOAbstract {
         List lista = criteria.list();
         session.getTransaction().commit();
         return (ArrayList) lista;
+    }
+    
+    public List listValor(String valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(PagamentoGab.class);
+        criteria.add(Restrictions.ilike("valorGab", "%"+valor+"%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+
+        return lista;
+    }
+
+        public List listData(Date data) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(PagamentoGab.class);
+        criteria.add(Restrictions.ge("dataPagamentoGab", data));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+     public List listValorData(Date data, String valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(PagamentoGab.class);
+        criteria.add(Restrictions.ge("dataPagamentoGab", data));
+        criteria.add(Restrictions.ilike("valorGab", "%"+valor+"%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
     }
     
 }
