@@ -19,10 +19,11 @@ import java.util.Date;
  * @author User
  */
 public class JDlgConsultaCompra extends javax.swing.JDialog {
+
     private JDlgCompra_gab jDlgCompra_gab;
     CompraGabDAO compraGabDAO;
     CompraControle_gab compraControle_gab;
-     
+
     /**
      * Creates new form JDlgConsultaFornecedor
      */
@@ -35,9 +36,8 @@ public class JDlgConsultaCompra extends javax.swing.JDialog {
         compraGabDAO = new CompraGabDAO();
         List lista = compraGabDAO.listAll();
         compraControle_gab.setList(lista);
-        jTable1.setModel(compraControle_gab); 
+        jTable1.setModel(compraControle_gab);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -144,8 +144,8 @@ public class JDlgConsultaCompra extends javax.swing.JDialog {
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
         // TODO add your handling code here:         
-             if (jTxtNome.getText().equals("") && jFmtData.getText().equals("")) {
-            List lista = compraGabDAO.listAll();
+        if (!jTxtNome.getText().equals("")) {
+            List lista = compraGabDAO.listNome(jTxtNome.getText());
             compraControle_gab.setList(lista);
         } else {
             if (!jTxtNome.getText().equals("") && !jFmtData.getText().equals("")) {
@@ -157,10 +157,10 @@ public class JDlgConsultaCompra extends javax.swing.JDialog {
                     List lista = compraGabDAO.listNome(jTxtNome.getText());
                     compraControle_gab.setList(lista);
                 } else {
-                    if (!jFmtData.getText().equals("")) {  
-                    Date data = Util_gab.strDate(jFmtData.getText());
-                    List lista = compraGabDAO.listData(data);
-                    compraControle_gab.setList(lista);
+                    if (!jFmtData.getText().equals("")) {
+                        Date data = Util_gab.strDate(jFmtData.getText());
+                        List lista = compraGabDAO.listData(data);
+                        compraControle_gab.setList(lista);
                     }
                 }
             }
@@ -212,7 +212,8 @@ public class JDlgConsultaCompra extends javax.swing.JDialog {
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);                    }
+                        System.exit(0);
+                    }
                 });
                 dialog.setVisible(true);
             }

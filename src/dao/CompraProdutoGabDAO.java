@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package dao;
+import bean.CompraGab;
 import bean.CompraprodutoGab;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,5 +60,15 @@ public class CompraProdutoGabDAO extends DAOAbstract{
         session.getTransaction().commit();
         return (ArrayList) lista;
     }
+    
+     public Object listProduto(CompraGab compraGab) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(CompraprodutoGab.class);
+        criteria.add(Restrictions.eq("compraGab", compraGab));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
     
 }

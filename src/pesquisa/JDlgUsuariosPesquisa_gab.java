@@ -11,10 +11,7 @@ import dao.UsuariosGabDAO;
 import java.util.List;
 import view.JDlgUsuarios_gab;
 
-/**
- *
- * @author u71665822198
- */
+
 public class JDlgUsuariosPesquisa_gab extends javax.swing.JDialog {
     
     private JDlgUsuarios_gab jDlgUsuarios_gab;

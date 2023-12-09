@@ -8,6 +8,7 @@ package view;
 import bean.PagamentoGab;
 import controle.PagamentoControle_gab;
 import dao.PagamentoGabDAO;
+import java.util.ArrayList;
 import java.util.List;
 import tools.Util_gab;
 
@@ -25,6 +26,7 @@ public class JDlgPagamentoNovo_gab extends javax.swing.JDialog {
     PagamentoControle_gab pagamentoControle_gab;
     PagamentoGabDAO pagamentoGabDAO ;
     PagamentoGab pagamentoGab;
+    PagamentoGab pagamento;
     
     public JDlgPagamentoNovo_gab(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -131,8 +133,19 @@ public class JDlgPagamentoNovo_gab extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
+    
+        int sel = jTable1.getSelectedRow();
+        pagamento = pagamentoControle_gab.getBean(sel);
+        jDlgPagamentoIA_gab.beanView(pagamento);
+         
         jDlgPagamentoIA_gab.setTitle("Alteração");
         jDlgPagamentoIA_gab.setVisible(true);
+        
+        List lista = pagamentoGabDAO.listAll();
+        pagamentoControle_gab.setList(lista);
+        jTable1.setModel(pagamentoControle_gab);
+        
+        
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed

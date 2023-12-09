@@ -53,8 +53,7 @@ public class JDlgFornecedor_gab extends javax.swing.JDialog {
     }
     
         public FornecedorGab viewBean() {
-        FornecedorGab fornecedorGab = new FornecedorGab();
-        
+        FornecedorGab fornecedorGab = new FornecedorGab();     
         fornecedorGab.setIdFornecedorGab(Util_gab.strInt(jTxtCodigo.getText()));
         fornecedorGab.setNomeGab(jTxtNome.getText());
         fornecedorGab.setDataCadastroGab(Util_gab.strDate(jFmtData.getText()));

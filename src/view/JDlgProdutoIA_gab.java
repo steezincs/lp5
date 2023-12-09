@@ -20,8 +20,9 @@ import tools.Util_gab;
  * @author User
  */
 public class JDlgProdutoIA_gab extends javax.swing.JDialog {
-    
-    MaskFormatter mascaraValor;
+                    
+        ProdutoGab produto; 
+        ProdutoGabDAO produtoGabDAO;
 
     /**
      * Creates new form JDlgProdutos
@@ -31,13 +32,8 @@ public class JDlgProdutoIA_gab extends javax.swing.JDialog {
         initComponents();
         Util_gab.limparCampos(jTxtCodigo, jTxtNome, jTxtDesc, jFmtValor, jCboTamanho, jCboCategoria);
         setLocationRelativeTo(null);
-        setTitle("Cadastro de Produto");
-        try {
-            mascaraValor = new MaskFormatter("R$###.##");
-        } catch (ParseException ex) {
-            Logger.getLogger(JDlgPagamentoIA_gab.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        jFmtValor.setFormatterFactory(new DefaultFormatterFactory(mascaraValor));
+        setTitle("Cadastro de Produto");    
+
     }
     
         public ProdutoGab viewBean() {
@@ -209,17 +205,18 @@ public class JDlgProdutoIA_gab extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        ProdutoGab produtogab = viewBean();
-
-        ProdutoGabDAO produtoGabDAO = new ProdutoGabDAO();
-
-        produtoGabDAO.insert(produtogab);
-
-        Util_gab.mensagem("Adicionado com sucesso!");
-        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jTxtDesc, jFmtValor, jCboTamanho, jCboCategoria);
+        produto = viewBean();
+      produtoGabDAO = new ProdutoGabDAO();
+        if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+          produtoGabDAO.insert(produto);
+          Util_gab.mensagem("Adicionado com sucesso!");
+        } else {            
+          produtoGabDAO.update(produto);
+          Util_gab.mensagem("Alterado com sucesso!");
+        }
+        Util_gab.limparCampos(jTxtCodigo, jTxtNome, jTxtDesc, jFmtValor, jCboTamanho, jCboCategoria);;
 
         setVisible(false);
-
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jFmtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtValorActionPerformed

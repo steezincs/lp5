@@ -101,8 +101,10 @@ public class ProdutoGab  implements java.io.Serializable {
         this.categoriaGab = categoriaGab;
     }
 
-
-
+    @Override
+    public String toString(){
+        return getNomeGab();
+    }
 
 }
 

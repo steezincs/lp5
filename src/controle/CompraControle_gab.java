@@ -9,10 +9,7 @@ import bean.CompraGab;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-/**
- *
- * @author u71665822198
- */
+
 public class CompraControle_gab extends AbstractTableModel {
     
     private List lista;
@@ -32,7 +29,7 @@ public class CompraControle_gab extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 4;
     }
 
     @Override
@@ -50,9 +47,6 @@ public class CompraControle_gab extends AbstractTableModel {
         if (columnIndex == 3){
             return compragab.getDataGab();
         }
-        if (columnIndex == 4){
-            return compragab.getFornecedorGab();
-        }
         return "";
     }
     @Override
@@ -68,9 +62,6 @@ public class CompraControle_gab extends AbstractTableModel {
         }
         if (column == 3){
             return "Data";
-        }
-        if (column == 4){
-            return "Fornecedor";
         }
          return "";
     } 

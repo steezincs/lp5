@@ -24,7 +24,7 @@ public class JDlgProdutoNovo_gab extends javax.swing.JDialog {
     private JDlgProdutoIA_gab jDlgProdutoIA_gab;
     ProdutoControle_gab produtoControle_gab;
     ProdutoGabDAO produtoGabDAO ;
-    ProdutoGab produtoGab;
+    ProdutoGab produto;
     
     public JDlgProdutoNovo_gab(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -130,17 +130,26 @@ public class JDlgProdutoNovo_gab extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        // TODO add your handling code here:
+
+        int sel = jTable1.getSelectedRow();
+        produto = produtoControle_gab.getBean(sel);
+         jDlgProdutoIA_gab.beanView(produto);
+        
         jDlgProdutoIA_gab.setTitle("Alteração");
-        jDlgProdutoIA_gab.setVisible(true);
+        jDlgProdutoIA_gab.setVisible(true); 
+         
+        List lista = produtoGabDAO.listAll();
+        produtoControle_gab.setList(lista);
+        jTable1.setModel(produtoControle_gab);
+
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
         if (Util_gab.perguntar("Deseja excluir o produto?") == true){
            int sel = jTable1.getSelectedRow();
-           produtoGab = produtoControle_gab.getBean(sel);
-           produtoGabDAO.delete(produtoGab);
+           produto = produtoControle_gab.getBean(sel);
+           produtoGabDAO.delete(produto);
            //atulizar lista no jtable
            List lista = produtoGabDAO.listAll();
            produtoControle_gab.setList(lista);

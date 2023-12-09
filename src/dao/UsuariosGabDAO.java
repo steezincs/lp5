@@ -61,4 +61,14 @@ public class UsuariosGabDAO extends DAOAbstract{
         return (ArrayList) lista;
     }
     
+    public UsuariosGab login(String usuarios, String senha){
+    session.beginTransaction();
+    Criteria criteria = session.createCriteria(UsuariosGab.class);
+    criteria.add(Restrictions.eq("nomeGab", usuarios));
+    criteria.add(Restrictions.eq("senhaGab", senha));
+    UsuariosGab usuarioAp = (UsuariosGab) criteria.uniqueResult();
+    session.getTransaction().commit();
+        return usuarioAp;
+    }
+    
 }

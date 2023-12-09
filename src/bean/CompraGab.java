@@ -1,16 +1,17 @@
 package bean;
-// Generated 21/09/2023 17:27:29 by Hibernate Tools 4.3.1
+// Generated 08/12/2023 20:59:02 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,6 +28,7 @@ public class CompraGab  implements java.io.Serializable {
 
      private int idCompraGab;
      private FornecedorGab fornecedorGab;
+     private UsuariosGab usuariosGab;
      private Date dataGab;
      private String nomeProdutoGab;
      private double valorGab;
@@ -35,15 +37,22 @@ public class CompraGab  implements java.io.Serializable {
     }
 
 	
-    public CompraGab(int idCompraGab, FornecedorGab fornecedorGab, Date dataGab, String nomeProdutoGab, double valorGab) {
+    public CompraGab(int idCompraGab, Date dataGab, String nomeProdutoGab, double valorGab) {
         this.idCompraGab = idCompraGab;
-        this.fornecedorGab = fornecedorGab;
         this.dataGab = dataGab;
         this.nomeProdutoGab = nomeProdutoGab;
         this.valorGab = valorGab;
     }
+    public CompraGab(int idCompraGab, FornecedorGab fornecedorGab, UsuariosGab usuariosGab, Date dataGab, String nomeProdutoGab, double valorGab, Set compraprodutoGabs) {
+       this.idCompraGab = idCompraGab;
+       this.fornecedorGab = fornecedorGab;
+       this.usuariosGab = usuariosGab;
+       this.dataGab = dataGab;
+       this.nomeProdutoGab = nomeProdutoGab;
+       this.valorGab = valorGab;
+    }
    
-     @Id
+     @Id 
 
     
     @Column(name="idCompra_gab", unique=true, nullable=false)
@@ -55,14 +64,24 @@ public class CompraGab  implements java.io.Serializable {
         this.idCompraGab = idCompraGab;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fk_Fornecedor_gab", nullable=false)
+@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="fk_Fornecedor_gab")
     public FornecedorGab getFornecedorGab() {
         return this.fornecedorGab;
     }
     
     public void setFornecedorGab(FornecedorGab fornecedorGab) {
         this.fornecedorGab = fornecedorGab;
+    }
+
+@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="fk_Usuarios_gab")
+    public UsuariosGab getUsuariosGab() {
+        return this.usuariosGab;
+    }
+    
+    public void setUsuariosGab(UsuariosGab usuariosGab) {
+        this.usuariosGab = usuariosGab;
     }
 
     @Temporal(TemporalType.DATE)
@@ -94,7 +113,6 @@ public class CompraGab  implements java.io.Serializable {
     public void setValorGab(double valorGab) {
         this.valorGab = valorGab;
     }
-
 
 
 

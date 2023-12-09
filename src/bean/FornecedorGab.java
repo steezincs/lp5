@@ -221,12 +221,22 @@ public class FornecedorGab  implements java.io.Serializable {
     public void setAtivoGab(String ativoGab) {
         this.ativoGab = ativoGab;
     }
-
-
-
-
-
-
+    
+     @Override
+    public String toString() {
+        return getNomeGab();
+    }
+    
+    public boolean equals (Object object) {
+    if (object instanceof FornecedorGab) {
+        FornecedorGab fornecedorGab = (FornecedorGab) object;
+        
+        if (this.getIdFornecedorGab()== fornecedorGab.getIdFornecedorGab()){
+            return true;
+        }
+    }
+    return false;
+    }
 
 }
 

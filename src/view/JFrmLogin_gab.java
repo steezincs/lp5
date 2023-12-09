@@ -5,6 +5,8 @@
  */
 package view;
 
+import bean.UsuariosGab;
+import dao.UsuariosGabDAO;
 import javax.swing.JOptionPane;
 import view.JFrmPrincipal_gab;
 
@@ -118,19 +120,16 @@ public class JFrmLogin_gab extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSairActionPerformed
 
     private void jBtnAcessar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAcessar1ActionPerformed
-        // TODO add your handling code here: 
-        
-        if(jTxtUsuario.getText().contains("gustavo") && jPwfSenha.getText().contains("123")){
+        // TODO add your handling code here:       
+        String usuario = jTxtUsuario.getText();
+        String senha = jPwfSenha.getText();
+        UsuariosGabDAO usuariosGabDAO = new UsuariosGabDAO();
+        UsuariosGab usuarios = usuariosGabDAO.login(usuario, senha);
+
+        if (usuarios != null) {
             JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
             JFrmPrincipal_gab jFrmPrincipal = new JFrmPrincipal_gab();
             jFrmPrincipal.setVisible(true);
-        }
-        
-        if(jTxtUsuario.getText().contains("admin") && jPwfSenha.getText().contains("123")){
-            JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
-            JFrmPrincipal_gab jFrmPrincipal = new JFrmPrincipal_gab();
-            jFrmPrincipal.setVisible(true);
-   
         } else {
             contadorTentativas++;
             JOptionPane.showMessageDialog(null, "Login incorreto! Tentativa " + contadorTentativas + " de 3","LOGIN INCORRETO",JOptionPane.ERROR_MESSAGE);
@@ -138,11 +137,10 @@ public class JFrmLogin_gab extends javax.swing.JFrame {
             if (contadorTentativas >= 3) {
                 JOptionPane.showMessageDialog(null, "Você alcançou o número máximo de tentativas.","TENTATIVAS MÁXIMAS",JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
-
-        this.dispose();
+            this.dispose();
             
        }
-     }       
+     }  
     }//GEN-LAST:event_jBtnAcessar1ActionPerformed
 
     /**

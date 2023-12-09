@@ -21,7 +21,8 @@ import tools.Util_gab;
  * @author User
  */
 public class JDlgPagamentoIA_gab extends javax.swing.JDialog {
-    
+    PagamentoGab pagamento; 
+    PagamentoGabDAO pagamentoGabDAO; 
     
     MaskFormatter mascaraValor, mascaraDataContrato;
 
@@ -206,11 +207,15 @@ public class JDlgPagamentoIA_gab extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        PagamentoGab pagamentogab = viewBean();
-        PagamentoGabDAO pagamentoGabDAO = new PagamentoGabDAO();
-        pagamentoGabDAO.insert(pagamentogab);
-
-        Util_gab.mensagem("Adicionado com sucesso!");
+          pagamento = viewBean();
+      pagamentoGabDAO = new PagamentoGabDAO();
+        if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+          pagamentoGabDAO.insert(pagamento);
+          Util_gab.mensagem("Adicionado com sucesso!");
+        } else {            
+          pagamentoGabDAO.update(pagamento);
+          Util_gab.mensagem("Alterado com sucesso!");
+        }
         Util_gab.limparCampos(jTxtCodigo, jFmtData, jCboPar,jCboPag, jFmtValor);;
 
         setVisible(false);

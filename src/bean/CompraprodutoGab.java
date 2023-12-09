@@ -1,5 +1,5 @@
 package bean;
-// Generated 21/09/2023 17:27:29 by Hibernate Tools 4.3.1
+// Generated 08/12/2023 20:59:02 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -22,16 +22,23 @@ import javax.persistence.Table;
 public class CompraprodutoGab  implements java.io.Serializable {
 
 
-     private int idcompraProdutoGab;
+     private Integer idcompraProdutoGab;
      private CompraGab compraGab;
      private ProdutoGab produtoGab;
      private int quantidadeGab;
-     private String valorUnitario;
+     private double valorUnitario;
 
     public CompraprodutoGab() {
     }
+    
+    public CompraprodutoGab(int idcompraProdutoGab, int quantidadeGab, double valorUnitario) {
+       this.idcompraProdutoGab = idcompraProdutoGab;
+       this.quantidadeGab = quantidadeGab;
+       this.valorUnitario = valorUnitario;
+    }
+    
 
-    public CompraprodutoGab(int idcompraProdutoGab, CompraGab compraGab, ProdutoGab produtoGab, int quantidadeGab, String valorUnitario) {
+    public CompraprodutoGab(int idcompraProdutoGab, CompraGab compraGab, ProdutoGab produtoGab, int quantidadeGab, double valorUnitario) {
        this.idcompraProdutoGab = idcompraProdutoGab;
        this.compraGab = compraGab;
        this.produtoGab = produtoGab;
@@ -39,20 +46,20 @@ public class CompraprodutoGab  implements java.io.Serializable {
        this.valorUnitario = valorUnitario;
     }
    
-     @Id
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="idcompraProduto_gab", unique=true, nullable=false)
-    public int getIdcompraProdutoGab() {
+    public Integer getIdcompraProdutoGab() {
         return this.idcompraProdutoGab;
     }
     
-    public void setIdcompraProdutoGab(int idcompraProdutoGab) {
+    public void setIdcompraProdutoGab(Integer idcompraProdutoGab) {
         this.idcompraProdutoGab = idcompraProdutoGab;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fk_Compra_gab", nullable=false)
+@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="fk_Compra_gab")
     public CompraGab getCompraGab() {
         return this.compraGab;
     }
@@ -61,8 +68,8 @@ public class CompraprodutoGab  implements java.io.Serializable {
         this.compraGab = compraGab;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fk_Produto_gab", nullable=false)
+@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="fk_Produto_gab")
     public ProdutoGab getProdutoGab() {
         return this.produtoGab;
     }
@@ -82,12 +89,12 @@ public class CompraprodutoGab  implements java.io.Serializable {
     }
 
     
-    @Column(name="valorUnitario", nullable=false, length=45)
-    public String getValorUnitario() {
+    @Column(name="valorUnitario", nullable=false, precision=22, scale=0)
+    public double getValorUnitario() {
         return this.valorUnitario;
     }
     
-    public void setValorUnitario(String valorUnitario) {
+    public void setValorUnitario(double valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
 

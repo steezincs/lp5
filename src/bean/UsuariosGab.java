@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 @Table(name="usuarios_gab"
     ,catalog="db_gustavo_barros"
 )
-public class UsuariosGab  implements java.io.Serializable {
+public class UsuariosGab implements java.io.Serializable {
 
 
      private int idUsuariosGab;
@@ -127,8 +127,21 @@ public class UsuariosGab  implements java.io.Serializable {
         this.ativoGab = ativoGab;
     }
 
-
-
+      @Override
+    public String toString() {
+        return getNomeGab();
+    }
+    
+    public boolean equals (Object object) {
+    if (object instanceof UsuariosGab) {
+       UsuariosGab usuariosGab = (UsuariosGab) object;
+        
+        if (this.getIdUsuariosGab()== usuariosGab.getIdUsuariosGab()){
+            return true;
+        }
+    }
+    return false;
+    }
 
 }
 
